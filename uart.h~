@@ -13,7 +13,7 @@ extern int periph_clk_khz;
 void init_uart(UART_MemMapPtr uartch, int sysclk, int baud);
 void uart_putchar (UART_MemMapPtr channel, uint8_t ch);
 void uartsend(uint8_t ch);
-void put(uint8_t *s);
+void puts(uint8_t *s);
 //void InitUart(void);
 char uart_read(void);
 uint16_t data_ready (UART_MemMapPtr channel);

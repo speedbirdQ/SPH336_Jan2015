@@ -69,7 +69,7 @@ void uartsend(uint8_t ch){
 }
 
 //send a string
-void put(uint8_t *s){
+void puts(uint8_t *s){
 	while(*s!='\0'){
 		uartsend(*s++);
 	}

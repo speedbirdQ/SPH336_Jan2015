@@ -1,0 +1,311 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+periph_clk_khz      0x4               out/system_k60.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+VECTORS          0x0000000000000000 0x0000000000000410 xr
+FLASH            0x0000000000000800 0x000000000007f800 xr
+SRAM_U           0x000000001fff0000 0x0000000000010000 xrw
+SRAM_L           0x0000000020000000 0x0000000000010000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD out/main.o
+LOAD out/startup_k60.o
+LOAD out/system_k60.o
+LOAD out/uart.o
+START GROUP
+LOAD /usr/lib/gcc/arm-none-eabi/4.8.2/armv7e-m/libgcc.a
+LOAD /usr/lib/gcc/arm-none-eabi/4.8.2/../../../arm-none-eabi/lib/armv7e-m/libg.a
+LOAD /usr/lib/gcc/arm-none-eabi/4.8.2/../../../arm-none-eabi/lib/armv7e-m/libc.a
+END GROUP
+
+.vectortable    0x0000000000000000      0x410
+                0x0000000000000000                __vector_table = .
+                0x0000000000000000                . = ALIGN (0x4)
+ *(.vectors)
+ .vectors       0x0000000000000000      0x410 out/startup_k60.o
+                0x0000000000000000                g_pfnVectors
+                0x0000000000000410                . = ALIGN (0x4)
+
+.text           0x0000000000000800      0x84c
+                0x0000000000000800                . = ALIGN (0x4)
+ *(.text)
+ .text          0x0000000000000800      0x3f0 out/main.o
+                0x0000000000000800                gpio_init
+                0x0000000000000950                toggle_LED1
+                0x0000000000000980                toggle_LED2
+                0x00000000000009b8                PORTA_IRQHandler
+                0x00000000000009d4                led_blinker
+                0x0000000000000aa0                main
+                0x0000000000000b3c                delay
+                0x0000000000000b78                char_convert_int
+ .text          0x0000000000000bf0       0x9c out/startup_k60.o
+                0x0000000000000bf0                CAN0_Rx_Warning_IRQHandler
+                0x0000000000000bf0                I2C0_IRQHandler
+                0x0000000000000bf0                CAN1_ORed_Message_buffer_IRQHandler
+                0x0000000000000bf0                UART3_RX_TX_IRQHandler
+                0x0000000000000bf0                UART0_RX_TX_IRQHandler
+                0x0000000000000bf0                I2C1_IRQHandler
+                0x0000000000000bf0                DMA2_IRQHandler
+                0x0000000000000bf0                ENET_Error_IRQHandler
+                0x0000000000000bf0                CAN0_Tx_Warning_IRQHandler
+                0x0000000000000bf0                PIT0_IRQHandler
+                0x0000000000000bf0                CAN0_ORed_Message_buffer_IRQHandler
+                0x0000000000000bf0                Watchdog_IRQHandler
+                0x0000000000000bf0                CMP2_IRQHandler
+                0x0000000000000bf0                I2S0_IRQHandler
+                0x0000000000000bf0                TSI0_IRQHandler
+                0x0000000000000bf0                ENET_Receive_IRQHandler
+                0x0000000000000bf0                ENET_1588_Timer_IRQHandler
+                0x0000000000000bf0                CAN1_Error_IRQHandler
+                0x0000000000000bf0                UART2_RX_TX_IRQHandler
+                0x0000000000000bf0                ADC0_IRQHandler
+                0x0000000000000bf0                CMT_IRQHandler
+                0x0000000000000bf0                UART4_RX_TX_IRQHandler
+                0x0000000000000bf0                SPI1_IRQHandler
+                0x0000000000000bf0                DMA9_IRQHandler
+                0x0000000000000bf0                DMA14_IRQHandler
+                0x0000000000000bf0                CMP1_IRQHandler
+                0x0000000000000bf0                PORTD_IRQHandler
+                0x0000000000000bf0                PORTB_IRQHandler
+                0x0000000000000bf0                UART4_ERR_IRQHandler
+                0x0000000000000bf0                ADC1_IRQHandler
+                0x0000000000000bf0                PIT2_IRQHandler
+                0x0000000000000bf0                LPTimer_IRQHandler
+                0x0000000000000bf0                DMA5_IRQHandler
+                0x0000000000000bf0                RTC_IRQHandler
+                0x0000000000000bf0                PDB0_IRQHandler
+                0x0000000000000bf0                CAN1_Bus_Off_IRQHandler
+                0x0000000000000bf0                FTM1_IRQHandler
+                0x0000000000000bf0                UART5_RX_TX_IRQHandler
+                0x0000000000000bf0                UART3_ERR_IRQHandler
+                0x0000000000000bf0                PIT3_IRQHandler
+                0x0000000000000bf0                SDHC_IRQHandler
+                0x0000000000000bf0                MCG_IRQHandler
+                0x0000000000000bf0                UART2_ERR_IRQHandler
+                0x0000000000000bf0                DMA11_IRQHandler
+                0x0000000000000bf0                UART5_ERR_IRQHandler
+                0x0000000000000bf0                Read_Collision_IRQHandler
+                0x0000000000000bf0                Default_Handler
+                0x0000000000000bf0                DMA7_IRQHandler
+                0x0000000000000bf0                ENET_Transmit_IRQHandler
+                0x0000000000000bf0                USB_IRQHandler
+                0x0000000000000bf0                CAN1_Tx_Warning_IRQHandler
+                0x0000000000000bf0                USB0_IRQHandler
+                0x0000000000000bf0                LLW_IRQHandler
+                0x0000000000000bf0                SPI2_IRQHandler
+                0x0000000000000bf0                CAN1_Rx_Warning_IRQHandler
+                0x0000000000000bf0                CAN1_Wake_Up_IRQHandler
+                0x0000000000000bf0                DMA13_IRQHandler
+                0x0000000000000bf0                DMA3_IRQHandler
+                0x0000000000000bf0                RNG_IRQHandler
+                0x0000000000000bf0                DMA0_IRQHandler
+                0x0000000000000bf0                DMA15_IRQHandler
+                0x0000000000000bf0                DAC0_IRQHandler
+                0x0000000000000bf0                Software_IRQHandler
+                0x0000000000000bf0                CAN0_Error_IRQHandler
+                0x0000000000000bf0                DMA4_IRQHandler
+                0x0000000000000bf0                PIT1_IRQHandler
+                0x0000000000000bf0                UART0_ERR_IRQHandler
+                0x0000000000000bf0                DMA_Error_IRQHandler
+                0x0000000000000bf0                LVD_LVW_IRQHandler
+                0x0000000000000bf0                SPI0_IRQHandler
+                0x0000000000000bf0                FTM0_IRQHandler
+                0x0000000000000bf0                DAC1_IRQHandler
+                0x0000000000000bf0                MCM_IRQHandler
+                0x0000000000000bf0                DMA12_IRQHandler
+                0x0000000000000bf0                FTFL_IRQHandler
+                0x0000000000000bf0                CAN0_Bus_Off_IRQHandler
+                0x0000000000000bf0                PORTE_IRQHandler
+                0x0000000000000bf0                FTM2_IRQHandler
+                0x0000000000000bf0                DMA8_IRQHandler
+                0x0000000000000bf0                DMA10_IRQHandler
+                0x0000000000000bf0                CAN0_Wake_Up_IRQHandler
+                0x0000000000000bf0                UART1_ERR_IRQHandler
+                0x0000000000000bf0                UART1_RX_TX_IRQHandler
+                0x0000000000000bf0                CMP0_IRQHandler
+                0x0000000000000bf0                PORTC_IRQHandler
+                0x0000000000000bf0                DMA6_IRQHandler
+                0x0000000000000bf0                DMA1_IRQHandler
+                0x0000000000000bf8                Reset_Handler
+ .text          0x0000000000000c8c      0x1ec out/system_k60.o
+                0x0000000000000c8c                SystemInit
+ .text          0x0000000000000e78      0x1c4 out/uart.o
+                0x0000000000000e78                init_uart
+                0x0000000000000f44                uart_putchar
+                0x0000000000000f70                uart_getchar
+                0x0000000000000f9c                data_ready
+                0x0000000000000fc4                uart_read
+                0x0000000000000fdc                uartsend
+                0x0000000000000ffc                put
+                0x0000000000001024                data_available
+ *(.text*)
+ *(.rodata)
+ .rodata        0x000000000000103c       0x10 out/main.o
+ *(.rodata*)
+ *(.glue_7)
+ .glue_7        0x0000000000000000        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x0000000000000000        0x0 linker stubs
+ *(.eh_frame)
+ *(.init)
+ *(.fini)
+                0x000000000000104c                . = ALIGN (0x4)
+                0x000000000000104c                _etext = .
+
+.vfp11_veneer   0x000000000000104c        0x0
+ .vfp11_veneer  0x0000000000000000        0x0 linker stubs
+
+.v4_bx          0x000000000000104c        0x0
+ .v4_bx         0x0000000000000000        0x0 linker stubs
+
+.iplt           0x000000000000104c        0x0
+ .iplt          0x0000000000000000        0x0 out/main.o
+
+.rel.dyn        0x000000000000104c        0x0
+ .rel.iplt      0x0000000000000000        0x0 out/main.o
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x000000000000104c                __exidx_start = .
+
+.ARM.exidx
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x000000000000104c                __exidx_end = .
+
+.preinit_array  0x000000000000104c        0x0
+                0x000000000000104c                PROVIDE (__preinit_array_start, .)
+ *(.preinit_array*)
+                0x000000000000104c                PROVIDE (__preinit_array_end, .)
+
+.init_array     0x000000000000104c        0x0
+                0x000000000000104c                PROVIDE (__init_array_start, .)
+ *(SORT(.init_array.*))
+ *(.init_array*)
+                0x000000000000104c                PROVIDE (__init_array_end, .)
+
+.fini_array     0x000000000000104c        0x0
+                0x000000000000104c                PROVIDE (__fini_array_start, .)
+ *(SORT(.fini_array.*))
+ *(.fini_array*)
+                0x000000000000104c                PROVIDE (__fini_array_end, .)
+                0x000000000000104c                __etext = .
+
+.data           0x000000001fff0000       0x18 load address 0x000000000000104c
+                0x000000001fff0000                . = ALIGN (0x4)
+                0x000000001fff0000                _sdata = .
+ *(.data)
+ .data          0x000000001fff0000       0x18 out/main.o
+                0x000000001fff0000                PA
+                0x000000001fff0004                PE
+                0x000000001fff0008                GPIOA
+                0x000000001fff000c                GPIOE
+                0x000000001fff0010                nvic
+                0x000000001fff0014                osci
+ .data          0x000000001fff0018        0x0 out/startup_k60.o
+ .data          0x000000001fff0018        0x0 out/system_k60.o
+ .data          0x000000001fff0018        0x0 out/uart.o
+ *(.data*)
+                0x000000001fff0018                . = ALIGN (0x4)
+                0x000000001fff0018                _edata = .
+
+.igot.plt       0x000000001fff0018        0x0 load address 0x0000000000001064
+ .igot.plt      0x0000000000000000        0x0 out/main.o
+                0x000000001fff0018                . = ALIGN (0x4)
+
+.bss            0x000000001fff0018        0x4 load address 0x0000000000001064
+                0x000000001fff0018                _sbss = .
+ *(.bss)
+ .bss           0x000000001fff0018        0x0 out/main.o
+ .bss           0x000000001fff0018        0x0 out/startup_k60.o
+ .bss           0x000000001fff0018        0x0 out/system_k60.o
+ .bss           0x000000001fff0018        0x0 out/uart.o
+ *(.bss*)
+ *(COMMON)
+ COMMON         0x000000001fff0018        0x4 out/system_k60.o
+                0x000000001fff0018                periph_clk_khz
+                0x000000001fff001c                . = ALIGN (0x4)
+                0x000000001fff001c                _ebss = .
+
+.heap           0x000000001fff001c        0x0
+                0x000000001fff001c                __end__ = .
+                0x000000001fff001c                end = __end__
+ *(.heap*)
+                0x000000001fff001c                __HeapLimit = .
+
+.stack_dummy    0x000000001fff001c        0x0
+ *(.stack*)
+                0x0000000020000000                __StackTop = (ORIGIN (SRAM_U) + 0x10000)
+                0x0000000020000000                __StackLimit = (__StackTop - SIZEOF (.stack_dummy))
+                0x0000000020000000                PROVIDE (__stack, __StackTop)
+                0x0000000000000001                ASSERT ((__StackLimit >= __HeapLimit), region RAM overflowed with stack)
+
+.ARM.attributes
+                0x0000000000000000       0x33
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x0000000000000000       0x33 out/main.o
+ .ARM.attributes
+                0x0000000000000033       0x33 out/startup_k60.o
+ .ARM.attributes
+                0x0000000000000066       0x33 out/system_k60.o
+ .ARM.attributes
+                0x0000000000000099       0x33 out/uart.o
+OUTPUT(out/k60_gpio_demo.elf elf32-littlearm)
+
+.debug_info     0x0000000000000000     0x13f0
+ .debug_info    0x0000000000000000      0xa2c out/main.o
+ .debug_info    0x0000000000000a2c       0xed out/startup_k60.o
+ .debug_info    0x0000000000000b19      0x4ec out/system_k60.o
+ .debug_info    0x0000000000001005      0x3eb out/uart.o
+
+.debug_abbrev   0x0000000000000000      0x579
+ .debug_abbrev  0x0000000000000000      0x239 out/main.o
+ .debug_abbrev  0x0000000000000239       0xab out/startup_k60.o
+ .debug_abbrev  0x00000000000002e4      0x11f out/system_k60.o
+ .debug_abbrev  0x0000000000000403      0x176 out/uart.o
+
+.debug_aranges  0x0000000000000000       0x80
+ .debug_aranges
+                0x0000000000000000       0x20 out/main.o
+ .debug_aranges
+                0x0000000000000020       0x20 out/startup_k60.o
+ .debug_aranges
+                0x0000000000000040       0x20 out/system_k60.o
+ .debug_aranges
+                0x0000000000000060       0x20 out/uart.o
+
+.debug_line     0x0000000000000000      0x33b
+ .debug_line    0x0000000000000000      0x12b out/main.o
+ .debug_line    0x000000000000012b       0x61 out/startup_k60.o
+ .debug_line    0x000000000000018c       0xe3 out/system_k60.o
+ .debug_line    0x000000000000026f       0xcc out/uart.o
+
+.debug_str      0x0000000000000000      0x640
+ .debug_str     0x0000000000000000      0x3fe out/main.o
+                                        0x44e (size before relaxing)
+ .debug_str     0x00000000000003fe       0x6d out/startup_k60.o
+                                        0x11f (size before relaxing)
+ .debug_str     0x000000000000046b      0x14d out/system_k60.o
+                                        0x2b3 (size before relaxing)
+ .debug_str     0x00000000000005b8       0x88 out/uart.o
+                                        0x271 (size before relaxing)
+
+.comment        0x0000000000000000       0x1f
+ .comment       0x0000000000000000       0x1f out/main.o
+                                         0x20 (size before relaxing)
+ .comment       0x0000000000000000       0x20 out/startup_k60.o
+ .comment       0x0000000000000000       0x20 out/system_k60.o
+ .comment       0x0000000000000000       0x20 out/uart.o
+
+.debug_frame    0x0000000000000000      0x25c
+ .debug_frame   0x0000000000000000       0xf0 out/main.o
+ .debug_frame   0x00000000000000f0       0x48 out/startup_k60.o
+ .debug_frame   0x0000000000000138       0x2c out/system_k60.o
+ .debug_frame   0x0000000000000164       0xf8 out/uart.o
